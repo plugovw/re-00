@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>RE:00 — медиа о том, как выглядел и звучал ранний интернет</title>
+<meta name="description" content="RE:00 — независимое медиа о визуальной культуре 1990-х и 2000-х. Подкасты, архивы, радио и печатные проекты о раннем интернете, музыке и дизайне.">
+<link rel="icon" href="assets/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="512x512" href="assets/favicon-512.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;900&display=swap&subset=cyrillic" rel="stylesheet">
+<style>
+:root{--ink:#fff;--acid:#c5f914;--grey:#2b2b2b;--font:"Unbounded","Arial Black",Arial,sans-serif;--pad:clamp(20px,4vw,56px)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:#000;color:var(--ink);font-family:var(--font);line-height:1.35;overflow-x:hidden}
+a{color:inherit}
+button,input{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--acid);outline-offset:3px}
+section{padding:clamp(64px,9vw,120px) var(--pad);position:relative}
+h1,h2,h3{font-weight:900;text-transform:uppercase;line-height:.95;letter-spacing:-.01em}
+h2{font-size:clamp(34px,7vw,110px);margin-bottom:clamp(20px,3vw,44px)}
+.acid{color:var(--acid)}
+.lead{font-size:clamp(14px,1.5vw,20px);font-weight:500;max-width:36em}
+.pill{display:inline-block;background:var(--acid);color:#000;border-radius:999px;padding:.5em 1.1em;font-weight:900;font-size:clamp(11px,1.1vw,14px)}
+.pill.o{background:none;color:#fff;border:2px solid #fff}
+
+header{position:fixed;inset:0 0 auto 0;z-index:10;display:flex;justify-content:space-between;align-items:center;padding:calc(14px + env(safe-area-inset-top,0px)) var(--pad) 14px}
+header img{height:clamp(34px,4.5vw,52px);display:block}
+nav{display:flex;gap:8px}
+nav a{background:#000;border:2px solid #fff;border-radius:999px;padding:.55em 1.1em;font-size:12px;font-weight:500;text-decoration:none;transition:.15s}
+nav a:hover{background:var(--acid);color:#000;border-color:var(--acid)}
+
+#top{min-height:100svh;padding-top:100px;display:flex;flex-direction:column;justify-content:center;gap:clamp(12px,2vw,28px)}
+.mega{font-size:clamp(72px,24vw,400px);line-height:.8;letter-spacing:-.04em;display:flex;align-items:flex-end;white-space:nowrap}
+.mega span{display:inline-block;animation:drop .7s cubic-bezier(.2,1.4,.4,1) both}
+.mega span:nth-child(2){animation-delay:.1s}.mega span:nth-child(3){animation-delay:.2s}.mega span:nth-child(4){animation-delay:.3s}.mega span:nth-child(5){animation-delay:.4s}
+.mega .colon{color:var(--acid);animation:drop .7s .2s cubic-bezier(.2,1.4,.4,1) both,blink 1s 1s steps(1) infinite}
+@keyframes drop{from{transform:translateY(-120%);opacity:0}to{transform:none;opacity:1}}
+@keyframes blink{50%{opacity:0}}
+.hero-row{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between}
+.hero-row p{font-size:clamp(14px,1.8vw,22px);max-width:30em;font-weight:500}
+.hero-row a{text-decoration:none}
+
+.marquee{background:var(--acid);color:#000;overflow:hidden;white-space:nowrap;padding:14px 0;border-block:3px solid #000}
+.marquee div{display:inline-block;animation:run 30s linear infinite;font-weight:900;text-transform:uppercase;font-size:clamp(18px,3vw,36px)}
+.marquee:hover div{animation-play-state:paused}
+@keyframes run{to{transform:translateX(-50%)}}
+
+/* подкасты */
+.eps{list-style:none;border-top:3px solid #fff}
+.ep{display:grid;grid-template-columns:clamp(48px,7vw,100px) 1fr auto auto;gap:clamp(12px,2vw,28px);align-items:center;padding:clamp(16px,2vw,28px) 8px;border-bottom:3px solid #fff;transition:background .15s,color .15s}
+.ep:hover,.ep.on{background:var(--acid);color:#000}
+.ep .n{font-weight:900;font-size:clamp(22px,4vw,56px)}
+.ep h3{font-size:clamp(16px,2.4vw,34px);margin-bottom:8px}
+.ep p{font-size:clamp(11px,1.1vw,14px);font-weight:500;max-width:44em}
+.ep time{font-size:clamp(11px,1.2vw,15px);font-weight:500;white-space:nowrap}
+.play{width:clamp(44px,5vw,64px);aspect-ratio:1;border-radius:50%;border:3px solid currentColor;background:none;cursor:pointer;display:grid;place-items:center;transition:.15s}
+.play:hover{background:#000;color:var(--acid);border-color:#000}
+.play i{width:0;height:0;border-left:14px solid currentColor;border-block:9px solid transparent;margin-left:4px}
+.eq{display:none;gap:3px;align-items:flex-end;height:20px}
+.eq b{width:4px;background:currentColor;animation:bar .6s steps(4) infinite alternate}
+.eq b:nth-child(2){animation-delay:.15s}.eq b:nth-child(3){animation-delay:.3s}.eq b:nth-child(4){animation-delay:.1s}
+@keyframes bar{from{height:4px}to{height:20px}}
+.ep.on .play i{display:none}.ep.on .eq{display:flex}
+.note{margin-top:16px;font-size:12px;font-weight:500;opacity:.7}
+
+/* проекты */
+.pg{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.pr{border-radius:36px;padding:clamp(18px,2.2vw,30px);min-height:clamp(280px,30vw,400px);position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;gap:10px;text-decoration:none;transition:transform .15s}
+.pr:hover{transform:translateY(-6px)}
+.pr h3{font-size:clamp(20px,2.4vw,34px)}
+.pr p{font-size:clamp(12px,1.1vw,14px);font-weight:500;max-width:26em}
+.pr .tag{position:absolute;top:clamp(18px,2.2vw,30px);left:clamp(18px,2.2vw,30px)}
+.p-a{background:var(--acid);color:#000}.p-a .pill{background:#000;color:var(--acid)}
+.p-w{background:#fff;color:#000}.p-w .pill{background:#000;color:#fff}
+.p-g{background:var(--grey)}
+.p-o{border:3px solid #fff}
+.p-wide{grid-column:span 2}
+.pix{position:absolute;top:20px;right:20px;display:grid;grid-template-columns:repeat(8,1fr);gap:4px;width:clamp(110px,14vw,190px)}
+.pix i{aspect-ratio:1;background:#000;transition:background .2s}.pix i.on{background:var(--acid)}
+.orbit{position:absolute;top:36%;right:12%;width:clamp(110px,14vw,190px);aspect-ratio:1;translate:0 -50%;border:3px solid #000;border-radius:50%;animation:spin 8s linear infinite}
+.orbit::after{content:"";position:absolute;top:-14px;left:50%;margin-left:-14px;width:28px;height:28px;background:#000;clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%)}
+@keyframes spin{to{rotate:360deg}}
+.big{position:absolute;top:0;right:20px;font-size:clamp(100px,14vw,200px);font-weight:900;line-height:1;transition:.3s}
+.pr:hover .big{color:var(--acid);-webkit-text-stroke:3px #000}
+
+/* о бренде */
+#about{background:var(--grey);overflow:hidden}
+#about .lead{margin-bottom:clamp(28px,4vw,56px);padding-left:20px;border-left:6px solid var(--acid)}
+.rules{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.rules div{background:#000;border-radius:28px;padding:clamp(18px,2.2vw,30px)}
+.rules h3{font-size:clamp(20px,2.4vw,34px);margin-bottom:12px;color:var(--acid)}
+.rules p{font-size:clamp(12px,1.1vw,14px);font-weight:500}
+.ghost{position:absolute;right:-2vw;top:-2vw;font-size:clamp(160px,32vw,520px);font-weight:900;color:#000;opacity:.35;line-height:.8;pointer-events:none;user-select:none}
+
+/* рассылка */
+#mail h2{max-width:11em}
+.f{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px;max-width:640px}
+.f input{flex:1 1 260px;background:#000;border:3px solid #fff;border-radius:999px;padding:.9em 1.4em;font-size:clamp(13px,1.3vw,16px)}
+.f input::placeholder{color:#888}
+.btn{border:3px solid var(--acid);background:var(--acid);color:#000;border-radius:999px;padding:.9em 1.8em;font-weight:900;font-size:clamp(13px,1.3vw,16px);text-transform:uppercase;cursor:pointer;transition:.15s}
+.btn:hover{background:#fff;border-color:#fff;transform:translateY(-4px)}
+#ok{margin-top:16px;font-weight:500;font-size:14px;min-height:1.4em}
+.checker{position:absolute;right:0;bottom:0;width:clamp(100px,20vw,280px);aspect-ratio:1;background:conic-gradient(#fff 25%,#000 0 50%,#fff 0 75%,#000 0) 0 0/50% 50%;animation:jump 1.2s steps(1) infinite}
+@keyframes jump{50%{background-position:50% 0}}
+#mail{overflow:hidden}
+
+footer{padding:24px var(--pad) calc(24px + env(safe-area-inset-bottom,0px));display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;font-size:12px;font-weight:500;border-top:3px solid var(--acid)}
+footer img{height:36px}
+footer nav a{border:0;padding:0;background:none;text-decoration:underline}
+footer nav{gap:20px;flex-wrap:wrap}
+
+@media(max-width:860px){
+  .pg,.rules{grid-template-columns:1fr}.p-wide{grid-column:auto}
+  nav a:nth-child(n+3){display:none}footer nav a:nth-child(n+3){display:inline}
+  .ep{grid-template-columns:44px 1fr auto}.ep time{display:none}
+  .mega{font-size:clamp(60px,23vw,200px)}
+}
+@media(prefers-reduced-motion:reduce){*,*::after{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header>
+  <a href="#top" aria-label="RE:00 — на главную"><img src="assets/logo-light.png" alt="RE:00"></a>
+  <nav>
+    <a href="#podcasts">Подкасты</a>
+    <a href="#projects">Проекты</a>
+    <a href="#about">О нас</a>
+    <a href="#mail">Рассылка</a>
+  </nav>
+</header>
+
+<main>
+  <section id="top">
+    <h1 class="mega" aria-label="RE:00"><span>R</span><span>E</span><span class="colon">:</span><span>0</span><span>0</span></h1>
+    <div class="hero-row">
+      <p>Медиа о том, как выглядел и звучал интернет, когда он только начинался.</p>
+      <a href="#podcasts" class="pill">Новый выпуск: №24 «Звук дозвона»</a>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true"><div id="mq"></div></div>
+
+  <section id="podcasts">
+    <h2>Подкасты</h2>
+    <p class="lead" style="margin-bottom:clamp(24px,3vw,40px)">Раз в две недели говорим с дизайнерами, музыкантами и теми, кто делал первые сайты. Каждый выпуск посвящён одной вещи из той эпохи.</p>
+    <ol class="eps" id="eps" reversed>
+      <li class="ep"><span class="n">24</span><div><h3>Звук дозвона</h3><p>Как модем пел на всю квартиру и почему мы ждали этот сигнал. Разбираем, что слышно в каждом отрезке.</p></div><time>42 мин</time><button class="play" aria-label="Слушать выпуск 24"><i></i><span class="eq"><b></b><b></b><b></b><b></b></span></button></li>
+      <li class="ep"><span class="n">23</span><div><h3>Сайт на GeoCities</h3><p>Личные страницы с бегущей строкой, счётчиком посетителей и гостевой книгой. Как их делали и кто их помнит.</p></div><time>51 мин</time><button class="play" aria-label="Слушать выпуск 23"><i></i><span class="eq"><b></b><b></b><b></b><b></b></span></button></li>
+      <li class="ep"><span class="n">22</span><div><h3>Winamp в 4 утра</h3><p>Скины, плейлисты и первые интернет-радио. Говорим с автором популярных скинов о том, как рисовали плеер.</p></div><time>47 мин</time><button class="play" aria-label="Слушать выпуск 22"><i></i><span class="eq"><b></b><b></b><b></b><b></b></span></button></li>
+      <li class="ep"><span class="n">21</span><div><h3>Flash-мультики</h3><p>Анимация на 200 килобайт, которую смотрела вся страна. Что осталось от неё после закрытия формата.</p></div><time>38 мин</time><button class="play" aria-label="Слушать выпуск 21"><i></i><span class="eq"><b></b><b></b><b></b><b></b></span></button></li>
+      <li class="ep"><span class="n">20</span><div><h3>Ты в сети</h3><p>Аськи, статусы и номера из шести цифр. Как мессенджеры научили нас писать коротко и ставить смайлы.</p></div><time>44 мин</time><button class="play" aria-label="Слушать выпуск 20"><i></i><span class="eq"><b></b><b></b><b></b><b></b></span></button></li>
+    </ol>
+  </section>
+
+  <section id="projects">
+    <h2>Проекты</h2>
+    <div class="pg">
+      <a href="#" class="pr p-a p-wide"><span class="pill tag">Архив</span><div class="pix" id="pix" aria-hidden="true"></div><h3>Архив пикселей</h3><p>Скриншоты и сохранённые копии сайтов 1998–2005 годов. Можно искать по цвету, шрифту и году.</p></a>
+      <a href="#" class="pr p-w"><span class="pill tag">Радио</span><div class="big" aria-hidden="true">FM</div><h3>RE:00 Radio</h3><p>Круглосуточный стрим: музыка из старых плееров, джинглы и звуки интерфейсов.</p></a>
+      <a href="#" class="pr p-g"><span class="pill tag">Печать</span><h3>Зин «Дозвон»</h3><p>Печатный журнал на 48 страниц с интервью, схемами сайтов и наклейками. Выходит два раза в год.</p></a>
+      <a href="#" class="pr p-o"><span class="pill o tag">Дизайн</span><h3>Скин-бюро</h3><p>Библиотека скинов для плееров и оболочек. Каждый можно скачать и разобрать по слоям.</p></a>
+      <a href="#" class="pr p-a"><span class="pill tag">Карта</span><div class="orbit" aria-hidden="true"></div><h3>Карта рунета</h3><p>Интерактивная карта первых российских сайтов: кто их сделал и что в них было.</p></a>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="ghost" aria-hidden="true">00</div>
+    <h2>RE — вернуться. 00 — начать с нуля.</h2>
+    <p class="lead">Мы выросли в эпоху, когда у интернета ещё не было правил. Дозвон по телефонной линии, сайты, собранные вручную, диски с музыкой из рук в руки. RE:00 собирает этот опыт, чтобы его не потеряли, и показывает, откуда выросли сегодняшние интерфейсы, клипы и обложки.</p>
+    <div class="rules">
+      <div><h3>Помнить</h3><p>Храним скриншоты, звуки и целые сайты, пока они не исчезли вместе с хостингом.</p></div>
+      <div><h3>Объяснять</h3><p>Разговариваем с авторами и очевидцами и записываем, как всё делалось на самом деле.</p></div>
+      <div><h3>Применять</h3><p>Переносим приёмы той эпохи в современный дизайн: сетку, цвет, шрифт, звук.</p></div>
+    </div>
+  </section>
+
+  <section id="mail">
+    <h2>Письмо из 2001-го</h2>
+    <p class="lead">Раз в неделю присылаем одну находку: сайт, песню или картинку из тех лет. Без рекламы.</p>
+    <form class="f" id="form" novalidate>
+      <input type="email" id="em" placeholder="ваша@почта.ру" aria-label="Электронная почта" required>
+      <button class="btn" type="submit">Подписаться</button>
+    </form>
+    <p id="ok" role="status"></p>
+    <div class="checker" aria-hidden="true"></div>
+  </section>
+</main>
+
+<footer>
+  <img src="assets/logo-light.png" alt="RE:00">
+  <nav><a href="#">Telegram</a><a href="#">YouTube</a><a href="#">Spotify</a><a href="mailto:hello@re00.media">hello@re00.media</a></nav>
+  <span>RE:00, независимое медиа. Москва</span>
+</footer>
+
+<script>
+(function(){
+  var w=['подкасты','архив','радио','зин','карта рунета','скины'];
+  var s=w.map(function(x){return x+' &nbsp;RE:00&nbsp; '}).join('');
+  document.getElementById('mq').innerHTML=s+s+s+s;
+
+  var box=document.getElementById('pix'),c=[],i;
+  for(i=0;i<64;i++){var e=document.createElement('i');box.appendChild(e);c.push(e)}
+  setInterval(function(){for(var k=0;k<6;k++)c[Math.floor(Math.random()*64)].classList.toggle('on')},250);
+
+  var rows=document.querySelectorAll('.ep');
+  rows.forEach(function(r){
+    r.querySelector('.play').addEventListener('click',function(){
+      var was=r.classList.contains('on');
+      rows.forEach(function(x){x.classList.remove('on')});
+      if(!was)r.classList.add('on');
+    });
+  });
+
+  document.getElementById('form').addEventListener('submit',function(ev){
+    ev.preventDefault();
+    var v=document.getElementById('em').value.trim(),ok=document.getElementById('ok');
+    ok.textContent=/^\S+@\S+\.\S+$/.test(v)?'Готово. Первое письмо придёт на '+v+'.':'Проверьте адрес: не хватает @ или домена.';
+  });
+})();
+</script>
+</body>
+</html>
